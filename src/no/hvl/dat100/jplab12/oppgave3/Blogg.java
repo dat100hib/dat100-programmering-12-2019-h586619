@@ -6,46 +6,92 @@ import no.hvl.dat100.jplab12.oppgave1.*;
 public class Blogg {
 
 	// TODO: objektvariable 
+	
+	private Innlegg[] innleggtabell;
+	private int nesteledig;
 
 	public Blogg() {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		
+		innleggtabell = new Innlegg[20];
 	}
 
 	public Blogg(int lengde) {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		
+		innleggtabell = new Innlegg[lengde];
+		nesteledig = 0;
 	}
 
 	public int getAntall() {
-		throw new UnsupportedOperationException(TODO.method());
+		
+		int antall = 0;
+		
+		for (int i = 0; i < innleggtabell.length; i++) {
+			if (innleggtabell[i] != null) {
+				antall++;
+			}
+		}
+		return antall;
 	}
 	
 	public Innlegg[] getSamling() {
-		throw new UnsupportedOperationException(TODO.method());
+		return this.innleggtabell;
 
 	}
 	
 	public int finnInnlegg(Innlegg innlegg) {
 
-		throw new UnsupportedOperationException(TODO.method());
+		boolean funnet = false;
+		
+		int pos = 0;
+		
+		while (pos < nesteledig && !funnet) {
+			if (innlegg.erLik(innleggtabell[pos]))
+				funnet = true;
+			else pos++;
+		}
+		if (funnet = true) 
+		return pos;
+		else return -1;
+		
 	}
 
 	public boolean finnes(Innlegg innlegg) {
-		throw new UnsupportedOperationException(TODO.method());
+		int pos = finnInnlegg(innlegg);
+		if (pos >= 0)
+			return true;
+		else return false;
 	}
 
 	public boolean ledigPlass() {
-		throw new UnsupportedOperationException(TODO.method());
+		if (nesteledig < innleggtabell.length) 
+			return true;
+			else return false;
 
 	}
 	
 	public boolean leggTil(Innlegg innlegg) {
 
-		throw new UnsupportedOperationException(TODO.method());
+		boolean ledig = ledigPlass();
+		boolean eritab = finnes(innlegg);
+		if (ledig == true && eritab == false) {
+			innleggtabell[nesteledig] = innlegg;
+			nesteledig++;
+			return true;
+		} else return false;
 	}
 	
+	
 	public String toString() {
+		
+		
 		throw new UnsupportedOperationException(TODO.method());
+		
+		
+		
 	}
+		
+		
+	
 
 	// valgfrie oppgaver nedenfor
 	
